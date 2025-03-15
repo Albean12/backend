@@ -1,0 +1,15 @@
+# Ignore virtual environments
+venv/
+myenv/
+
+# Ignore all `.log` files
+*.log
+
+# Ignore dependency files
+node_modules/
+vendor/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
