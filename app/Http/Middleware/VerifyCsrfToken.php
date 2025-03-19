@@ -16,5 +16,6 @@ class VerifyCsrfToken extends Middleware
         'api/logout',             // ✅ Exclude logout if needed
         'api/register',           // ✅ If you have user registration
         'sanctum/csrf-cookie',    // ✅ CSRF token endpoint
+        'api/auth/validate-token',  // ✅ Fix validate-token 419 error
     ];
 }
