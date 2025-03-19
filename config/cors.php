@@ -5,12 +5,11 @@ return [
     'allowed_methods' => ['*'],
     'allowed_origins' => [
         'http://localhost:3000',
-        'https://sea-gold-dormitory.vercel.app' // ✅ Added Vercel frontend
+        'https://sea-gold-dormitory.vercel.app'
     ],
-    'allowed_origins_patterns' => [], // ✅ Supports dynamic subdomains if needed
+    'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
-    'exposed_headers' => ['Authorization'],
+    'exposed_headers' => ['Authorization', 'XSRF-TOKEN'], // ✅ Expose CSRF Token
     'max_age' => 0,
-    'supports_credentials' => true, // ✅ Required for CSRF and Authentication
+    'supports_credentials' => true,
 ];
-
