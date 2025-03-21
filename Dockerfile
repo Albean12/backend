@@ -13,18 +13,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    tesseract-ocr \                  # ✅ Install Tesseract OCR
-    python3 \                        # ✅ Install Python3
-    python3-pip &&                   # ✅ Install pip for Python
+    tesseract-ocr && \                  # ✅ Install Tesseract OCR
     docker-php-ext-configure gd && \
     docker-php-ext-install gd pdo pdo_mysql
-
-# Make sure Python3 is properly linked
-RUN ln -s /usr/bin/python3 /usr/bin/python
-
-# Install Python dependencies for OCR script
-RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install easyocr numpy
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
