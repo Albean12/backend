@@ -13,13 +13,13 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    tesseract-ocr \              # ✅ Install Tesseract OCR
-    python3 \                    # ✅ Install Python for running your OCR script
-    python3-pip                   # ✅ Install pip for Python package installation
+    tesseract-ocr \            # ✅ Install Tesseract OCR
+    python3 \                  # ✅ Install Python3
+    python3-pip                # ✅ Install pip for Python package installation
 
 # Install Python dependencies for OCR script
-RUN pip3 install --upgrade pip setuptools wheel   # Ensure pip is up-to-date
-RUN pip3 install easyocr numpy
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install easyocr numpy
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
