@@ -4,7 +4,7 @@ FROM php:8.2-fpm
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies and tools
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -13,9 +13,14 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    tesseract-ocr && \                  # ✅ Install Tesseract OCR
-    docker-php-ext-configure gd && \
-    docker-php-ext-install gd pdo pdo_mysql
+    tesseract-ocr \
+    libtesseract-dev \
+    python3.9 \
+    python3.9-distutils \
+    python3.9-venv \
+    python3-pip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo pdo_mysql
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -28,6 +33,9 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Clear and optimize configuration cache
 RUN php artisan config:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache
+
+# Install Python packages for OCR
+RUN pip3 install easyocr numpy
 
 # Expose port
 EXPOSE 9000
