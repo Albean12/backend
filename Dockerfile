@@ -15,9 +15,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     tesseract-ocr \
     libtesseract-dev \
-    python3.9 \
-    python3.9-distutils \
-    python3.9-venv \
+    python3 \
+    python3-distutils \
+    python3-venv \
     python3-pip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql
