@@ -27,10 +27,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Clear and optimize configuration cache
-RUN php artisan config:clear
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
+RUN php artisan config:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache
 
 # Expose port
 EXPOSE 9000
