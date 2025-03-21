@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install -y \
     python3 \                 # ✅ Install Python for running your OCR script
     python3-pip               # ✅ Install pip for Python package installation
 
+# Configure and install PHP extensions
+RUN docker-php-ext-configure gd \
+    && docker-php-ext-install gd pdo pdo_mysql
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -27,8 +31,8 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install Python dependencies for your OCR script
-RUN pip3 install -r requirements.txt
+# Install Python dependencies for OCR script
+RUN pip3 install -r requirements.txt  # Make sure your requirements.txt exists
 
 # Laravel Optimization Commands (RUN these only during build phase)
 RUN php artisan config:clear
