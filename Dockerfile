@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    tesseract-ocr \             # ✅ Install Tesseract OCR
-    python3 \                   # ✅ Install Python3
-    python3-pip && \            # ✅ Install pip for Python
+    tesseract-ocr \                  # ✅ Install Tesseract OCR
+    python3 \                        # ✅ Install Python3
+    python3-pip &&                   # ✅ Install pip for Python
     docker-php-ext-configure gd && \
     docker-php-ext-install gd pdo pdo_mysql
 
