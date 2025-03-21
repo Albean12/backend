@@ -13,10 +13,14 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    tesseract-ocr \             # ✅ Install Tesseract OCR
-    libtesseract-dev \          # ✅ Install Tesseract Dev Library
-    python3 \                   # ✅ Install Python for running your OCR script
-    python3-pip                 # ✅ Install pip for Python package installation
+    lsb-release \
+    software-properties-common
+
+# ✅ Add Tesseract-OCR repository
+RUN apt-get update && apt-get install -y tesseract-ocr libtesseract-dev
+
+# Install Python and Pip
+RUN apt-get install -y python3 python3-pip
 
 # Configure and install PHP extensions
 RUN docker-php-ext-configure gd \
