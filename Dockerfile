@@ -22,6 +22,15 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql
 
+# Upgrade pip to the latest version
+RUN python3 -m pip install --upgrade pip
+
+# Install wheel for building dependencies smoothly
+RUN pip3 install wheel
+
+# Install Python packages for OCR
+RUN pip3 install easyocr numpy
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -33,9 +42,6 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Clear and optimize configuration cache
 RUN php artisan config:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache
-
-# Install Python packages for OCR
-RUN pip3 install easyocr numpy
 
 # Expose port
 EXPOSE 9000
