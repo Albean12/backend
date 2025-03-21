@@ -18,5 +18,6 @@ class VerifyCsrfToken extends Middleware
         'sanctum/csrf-cookie',    // ✅ CSRF token endpoint
         'api/auth/validate-token',  // ✅ Fix validate-token 419 error
         'api/applications/*/decline', // Exempt this route from CSRF protection
+        'api/upload-id',  // ✅ Exempt this route from CSRF protection
     ];
 }
