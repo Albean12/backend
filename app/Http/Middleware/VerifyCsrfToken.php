@@ -19,5 +19,6 @@ class VerifyCsrfToken extends Middleware
         'api/auth/validate-token',  // ✅ Fix validate-token 419 error
         'api/applications/*/decline', // Exempt this route from CSRF protection
         'api/upload-id',  // ✅ Exempt this route from CSRF protection
+        'api/units/*/status',
     ];
 }
