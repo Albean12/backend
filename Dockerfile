@@ -13,18 +13,13 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    lsb-release \
-    software-properties-common
+    tesseract-ocr \              # ✅ Install Tesseract OCR
+    python3 \                    # ✅ Install Python for running your OCR script
+    python3-pip                   # ✅ Install pip for Python package installation
 
-# ✅ Add Tesseract-OCR repository
-RUN apt-get update && apt-get install -y tesseract-ocr libtesseract-dev
-
-# Install Python and Pip
-RUN apt-get install -y python3 python3-pip
-
-# Configure and install PHP extensions
-RUN docker-php-ext-configure gd \
-    && docker-php-ext-install gd pdo pdo_mysql
+# Install Python dependencies for OCR script
+RUN pip3 install --upgrade pip setuptools wheel   # Ensure pip is up-to-date
+RUN pip3 install easyocr numpy
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -32,18 +27,14 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy project files
 COPY . .
 
-# Install PHP dependencies
+# Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install Python dependencies for OCR script
-RUN pip3 install easyocr numpy
-
-# Laravel Optimization Commands
+# Clear and optimize configuration cache
 RUN php artisan config:clear
-RUN php artisan cache:clear
-RUN php artisan route:clear
-RUN php artisan view:clear
-RUN php artisan optimize:clear
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
 
 # Expose port
 EXPOSE 9000
