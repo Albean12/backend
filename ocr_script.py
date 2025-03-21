@@ -8,11 +8,8 @@ import numpy as np
 image_path = sys.argv[1]
 expected_id_type = sys.argv[2].lower()
 
-# Initialize EasyOCR with local model storage
-reader = easyocr.Reader(
-    ['en', 'tl'], 
-    model_storage_directory="C:\\Users\\shana\\Documents\\dorm-vision\\backend\\.venv\\Lib\\site-packages\\easyocr\\model"
-)
+# Initialize EasyOCR (Ensure models are installed during Docker build)
+reader = easyocr.Reader(['en', 'tl'])
 
 # Perform OCR on the uploaded ID
 result = reader.readtext(image_path)
