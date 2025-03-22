@@ -175,6 +175,24 @@ public function accept(Request $request, $id)
     }
 }
 
+// Decline an application
+public function decline($id)
+{
+    try {
+        // Find the application by ID
+        $application = Application::findOrFail($id);
+
+        // Update the application status to 'Declined'
+        $application->status = 'Declined';
+        $application->save();
+
+        return response()->json(['message' => 'Application declined successfully.']);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'An error occurred while declining the application.'], 500);
+    }
+}
+
+
 public function update(Request $request, $id)
 {
     $request->validate([
