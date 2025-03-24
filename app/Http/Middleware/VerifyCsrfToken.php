@@ -12,16 +12,18 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'api/login-admin-tenant', // ✅ Exclude the correct login route
-        'api/logout',             // ✅ Exclude logout if needed
-        'api/register',           // ✅ If you have user registration
-        'sanctum/csrf-cookie',    // ✅ CSRF token endpoint
-        'api/auth/validate-token',  // ✅ Fix validate-token 419 error
-        'api/applications/*/decline', // Exempt this route from CSRF protection
-        'api/upload-id',  // ✅ Exempt this route from CSRF protection
+        'api/login-admin-tenant',
+        'api/logout',
+        'api/register',
+        'sanctum/csrf-cookie',
+        'api/auth/validate-token',
+        'api/applications/*/decline',
+        'api/upload-id',
         'api/units/*/status',
-        'api/maintenance-requests/*/update',  // ✅ MISSING COMMA FIXED HERE
-        'api/events',           // ✅ Match the full route
-        'api/events/*',         // ✅ Wildcard for nested routes
+        'api/maintenance-requests/*/update',
+        'api/events',           // Added explicit route
+        'api/events/*',         // Added wildcard for nested routes
+        'api/applications',     // Added to cover all application routes
+        'api/applications/*'    // Wildcard for nested application routes
     ];
 }
