@@ -21,6 +21,7 @@ class VerifyCsrfToken extends Middleware
         'api/upload-id',  // ✅ Exempt this route from CSRF protection
         'api/units/*/status',
         'api/maintenance-requests/*/update',  // ✅ MISSING COMMA FIXED HERE
-        'api/events/*',
+        'api/events',           // ✅ Match the full route
+        'api/events/*',         // ✅ Wildcard for nested routes
     ];
 }
