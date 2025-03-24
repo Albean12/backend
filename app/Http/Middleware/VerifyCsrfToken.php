@@ -18,6 +18,7 @@ class VerifyCsrfToken extends Middleware
         'sanctum/csrf-cookie',
         'api/auth/validate-token',
         'api/applications/*/decline',
+        'api/applications/*/accept',
         'api/upload-id',
         'api/units/*/status',
         'api/maintenance-requests/*/update',
